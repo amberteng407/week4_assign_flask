@@ -25,14 +25,16 @@ def signin():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        session["username"] = username
-        session["password"] = password   
-        if (request.form["username"] == "test") and (request.form["password"] == "test"):
+        if (username == "test") and (password == "test"):
+            session["username"] = username
+            session["password"] = password
             session["logged_in"] = True
             return redirect(url_for("member"))           
         else:
+            session["username"] = username
+            session["password"] = password
             return redirect(url_for("error"))
-            session.pop("username", None)
+            session.pop("username", None)   
     return render_template("home.html")
 
 @app.route("/member/")
